@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Happy Teachers Day</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Quicksand:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff6f2;
+        --hero1: #ffd3e0; /* soft pink */
+        --hero2: #c9e7ff; /* soft sky blue */
+        --ink: #5b4b49;
+        --coral: #ff8fa3;
+        --mustard: #ffd166;
+        --mint: #8fe3c2;
+        --pin: #ff6f91;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font-family: "Quicksand", sans-serif;
+        overflow-x: hidden;
+      }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        padding: 56px 20px 76px;
+        background: linear-gradient(160deg, var(--hero1), var(--hero2));
+        border-bottom: 10px solid #fff;
+      }
+      .dust {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      .dust span {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(255, 111, 145, 0.35);
+        animation: drift 9s linear infinite;
+      }
+
+      /* ---------- Cat ---------- */
+      .mascot {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto -6px;
+        animation: popIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      }
+      .paw {
+        transform-origin: 78% 78%;
+        animation: wave 1.8s ease-in-out infinite;
+      }
+      .tail {
+        transform-origin: 15% 90%;
+        animation: tailSwish 3.2s ease-in-out infinite;
+      }
+      .bubble {
+        opacity: 0;
+        transform-origin: 75% 100%;
+        animation: bubblePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards
+          1.05s;
+      }
+
+      /* ---------- Text ---------- */
+      h1 {
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        font-size: clamp(2.6rem, 8vw, 4.6rem);
+        margin: 8px 0 0;
+        line-height: 1;
+        animation: fadeIn 0.7s 0.5s both;
+      }
+      .subhead {
+        color: #7a5c8a;
+        margin: 6px 0 0;
+        animation: fadeIn 0.7s 0.7s both;
+      }
+      blockquote {
+        font-family: "Caveat", cursive;
+        font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+        max-width: 560px;
+        margin: 26px auto 0;
+        animation: fadeIn 0.7s 0.9s both;
+      }
+      cite {
+        display: block;
+        margin-top: 8px;
+        font-family: "Quicksand", sans-serif;
+        font-size: 0.85rem;
+        font-style: normal;
+        color: #c9497a;
+      }
+
+      /* ---------- Wall of chits ---------- */
+      main {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 56px 20px 70px;
+      }
+      .wall-title {
+        text-align: center;
+        font-family: "Caveat", cursive;
+        font-size: 2.4rem;
+        margin: 0 0 40px;
+      }
+      .wall {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 26px 22px;
+      }
+
+      .chit {
+        position: relative;
+        width: 220px;
+        min-height: 190px;
+        padding: 26px 18px 18px;
+        font-family: "Caveat", cursive;
+        font-size: 1.28rem;
+        line-height: 1.25;
+        box-shadow: 0 10px 20px rgba(91, 75, 73, 0.15);
+        opacity: 0;
+        animation: fallIn 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+      }
+      .chit::before {
+        /* push-pin */
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, #ffa9bd, var(--pin));
+        box-shadow: 0 3px 4px rgba(0, 0, 0, 0.22);
+      }
+      .chit .who {
+        display: block;
+        margin-top: 12px;
+        font-family: "Quicksand", sans-serif;
+        font-weight: 600;
+        font-size: 0.78rem;
+        color: #9a8a8a;
+      }
+      .chit:hover {
+        transform: rotate(0deg) scale(1.05) !important;
+        transition: transform 0.25s;
+      }
+
+      /* ---------- Button + footer ---------- */
+      .cta {
+        text-align: center;
+        margin-top: 56px;
+      }
+      .cta a {
+        display: inline-block;
+        padding: 14px 30px;
+        border-radius: 40px;
+        background: var(--coral);
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 8px 18px rgba(255, 143, 163, 0.45);
+        transition: transform 0.2s;
+      }
+      .cta a:hover {
+        transform: translateY(-2px);
+      }
+      footer {
+        text-align: center;
+        padding: 0 20px 40px;
+        font-size: 0.85rem;
+        color: #b09a9a;
+      }
+
+      /* ---------- Animations ---------- */
+      @keyframes popIn {
+        from {
+          opacity: 0;
+          transform: translateY(24px) scale(0.9);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+      }
+      @keyframes wave {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(-28deg);
+        }
+      }
+      @keyframes tailSwish {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(10deg);
+        }
+      }
+      @keyframes bubblePop {
+        from {
+          opacity: 0;
+          transform: scale(0.6);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      @keyframes drift {
+        from {
+          transform: translateY(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        to {
+          transform: translateY(-160px);
+          opacity: 0;
+        }
+      }
+      @keyframes fallIn {
+        from {
+          opacity: 0;
+          transform: translateY(26px) rotate(var(--r));
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) rotate(var(--r));
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+        }
+        .chit,
+        .bubble {
+          opacity: 1 !important;
+        }
+      }
+      @media (max-width: 480px) {
+        .chit {
+          width: 44vw;
+          min-width: 150px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="dust" id="dust"></div>
+
+      <!-- the cat -->
+      <svg
+        class="mascot"
+        viewBox="0 0 180 180"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <ellipse cx="85" cy="152" rx="40" ry="7" fill="rgba(0,0,0,.14)" />
+
+        <!-- tail -->
+        <path
+          class="tail"
+          d="M32 130 Q6 120 10 95 Q12 82 24 84 Q16 100 30 118 Z"
+          fill="#4A4458"
+        />
+
+        <!-- body and belly -->
+        <ellipse cx="82" cy="128" rx="42" ry="30" fill="#4A4458" />
+        <ellipse cx="82" cy="136" rx="22" ry="20" fill="#fff" />
+
+        <!-- mint bow -->
+        <path d="M70 108 L82 116 L70 124 Z" fill="#8FE3C2" />
+        <path d="M94 108 L82 116 L94 124 Z" fill="#8FE3C2" />
+        <circle cx="82" cy="116" r="4" fill="#5FBFA0" />
+
+        <!-- head and ears -->
+        <circle cx="80" cy="82" r="38" fill="#4A4458" />
+        <path d="M48 62 L38 34 L66 52 Z" fill="#4A4458" />
+        <path d="M112 62 L122 34 L94 52 Z" fill="#4A4458" />
+        <path d="M52 58 L45 42 L64 54 Z" fill="#FF8FA3" />
+        <path d="M108 58 L115 42 L96 54 Z" fill="#FF8FA3" />
+
+        <!-- cheeks -->
+        <ellipse cx="54" cy="96" rx="7" ry="4.5" fill="#FF8FA3" opacity=".55" />
+        <ellipse
+          cx="106"
+          cy="96"
+          rx="7"
+          ry="4.5"
+          fill="#FF8FA3"
+          opacity=".55"
+        />
+
+        <!-- eyes -->
+        <ellipse cx="65" cy="82" rx="8" ry="9.5" fill="#FFD166" />
+        <ellipse cx="95" cy="82" rx="8" ry="9.5" fill="#FFD166" />
+        <ellipse cx="65" cy="83" rx="4" ry="6.5" fill="#2B2733" />
+        <ellipse cx="95" cy="83" rx="4" ry="6.5" fill="#2B2733" />
+        <circle cx="63" cy="79" r="2.2" fill="#fff" />
+        <circle cx="93" cy="79" r="2.2" fill="#fff" />
+
+        <!-- muzzle, nose, mouth -->
+        <ellipse cx="80" cy="98" rx="17" ry="12" fill="#fff" />
+        <ellipse cx="80" cy="91" rx="3.2" ry="2.4" fill="#FF6F91" />
+        <path
+          d="M80 93.5 L80 98"
+          stroke="#5B4B49"
+          stroke-width="1.8"
+          stroke-linecap="round"
+        />
+        <path
+          d="M80 98 Q74 105 68 100 M80 98 Q86 105 92 100"
+          stroke="#5B4B49"
+          stroke-width="1.8"
+          fill="none"
+          stroke-linecap="round"
+        />
+
+        <!-- whiskers -->
+        <path
+          d="M26 92 L50 94 M26 102 L50 100"
+          stroke="#fff"
+          stroke-width="1.6"
+          stroke-linecap="round"
+        />
+        <path
+          d="M134 92 L110 94 M134 102 L110 100"
+          stroke="#fff"
+          stroke-width="1.6"
+          stroke-linecap="round"
+        />
+
+        <!-- waving paw and front paw -->
+        <ellipse class="paw" cx="118" cy="108" rx="14" ry="16" fill="#4A4458" />
+        <ellipse class="paw" cx="118" cy="99" rx="8" ry="7" fill="#fff" />
+        <ellipse cx="122" cy="138" rx="16" ry="13" fill="#fff" />
+
+        <!-- speech bubble (last, so it sits on top) -->
+        <g class="bubble">
+          <path
+            d="M108 18 h50 a10 10 0 0 1 10 10 v24 a10 10 0 0 1 -10 10 h-32 l-11 15 l2 -15 h-9 a10 10 0 0 1 -10 -10 v-24 a10 10 0 0 1 10 -10 Z"
+            fill="#fff"
+            stroke="#FF8FA3"
+            stroke-width="2.5"
+          />
+          <text
+            x="134"
+            y="40"
+            font-family="Quicksand, sans-serif"
+            font-weight="700"
+            font-size="12"
+            fill="#5B4B49"
+            text-anchor="middle"
+          >
+            Happy
+          </text>
+          <text
+            x="134"
+            y="54"
+            font-family="Quicksand, sans-serif"
+            font-weight="700"
+            font-size="12"
+            fill="#5B4B49"
+            text-anchor="middle"
+          >
+            Teachers Day!
+          </text>
+        </g>
+      </svg>
+
+      <h1>Happy Teachers Day, Mam Maria Latif</h1>
+      <p class="subhead">A little wall of thank-yous, just for you</p>
+
+      <blockquote>
+        "A good teacher can inspire hope, ignite the imagination, and instill a
+        love of learning." — Brad Henry
+      </blockquote>
+    </header>
+
+    <main>
+      <h2 class="wall-title">Notes from your students</h2>
+      <div class="wall" id="wall"></div>
+      <div class="cta"><a href="#" id="formLink">Add your own note 💌</a></div>
+    </main>
+
+    <footer>
+      Made with gratitude, for every teacher who shows up every day. 🍎
+    </footer>
+
+    <script>
+      /* ========== EDIT THESE ========== */
+      const SHEET_CSV_URL = ""; // your "Publish to web" CSV link
+      const FORM_URL = ""; // your Google Form link
+      const NAME_COL = 1; // column of the student name (A=0, B=1, C=2...), -1 if none
+      const MESSAGE_COL = 2; // column of the message
+      /* ================================ */
+
+      // shown until you connect your sheet
+      const SAMPLE = [
+        ["Thank you for always being so kind and patient with the Palestinian girl who sometimes struggles to find the right words in English. Your understanding makes learning feel so much easier and I truly appreciate you. 🤍", "Someone from SE"]
+      ];
+
+      const ROT = [-6, 4, -3, 5, -5, 3, -4, 6]; // tilt of each chit
+      const COLOR = ["#FFFDF8", "#FFF3D6", "#FFE6EC", "#E4F6FF"]; // paper colors
+
+      // floating dots in the hero
+      const dust = document.getElementById("dust");
+      for (let i = 0; i < 14; i++) {
+        const dot = document.createElement("span");
+        dot.style.left = Math.random() * 100 + "%";
+        dot.style.bottom = "-10px";
+        dot.style.animationDelay = Math.random() * 9 + "s";
+        dot.style.animationDuration = 7 + Math.random() * 5 + "s";
+        dust.append(dot);
+      }
+
+      // form button
+      const formLink = document.getElementById("formLink");
+      if (FORM_URL) {
+        formLink.href = FORM_URL;
+        formLink.target = "_blank";
+      } else {
+        formLink.style.display = "none";
+      }
+
+      // turns CSV text into rows (handles commas and quotes inside answers)
+      function parseCSV(text) {
+        const rows = [];
+        let row = [],
+          cell = "",
+          inQuotes = false;
+        for (let i = 0; i < text.length; i++) {
+          const c = text[i],
+            next = text[i + 1];
+          if (inQuotes) {
+            if (c === '"' && next === '"') {
+              cell += '"';
+              i++;
+            } else if (c === '"') inQuotes = false;
+            else cell += c;
+          } else if (c === '"') inQuotes = true;
+          else if (c === ",") {
+            row.push(cell);
+            cell = "";
+          } else if (c === "\n" || c === "\r") {
+            if (c === "\r" && next === "\n") i++;
+            row.push(cell);
+            cell = "";
+            rows.push(row);
+            row = [];
+          } else cell += c;
+        }
+        if (cell !== "" || row.length) {
+          row.push(cell);
+          rows.push(row);
+        }
+        return rows;
+      }
+
+      // builds one chit per response
+      function render(items) {
+        const wall = document.getElementById("wall");
+        wall.innerHTML = "";
+        items.forEach(([message, name], i) => {
+          const chit = document.createElement("div");
+          chit.className = "chit";
+          chit.style.setProperty("--r", ROT[i % ROT.length] + "deg");
+          chit.style.background = COLOR[i % COLOR.length];
+          chit.style.animationDelay = Math.min(0.2 + i * 0.12, 3) + "s";
+          chit.append(message);
+
+          if (name) {
+            const who = document.createElement("span");
+            who.className = "who";
+            who.textContent = "— " + name;
+            chit.append(who);
+          }
+          wall.append(chit);
+        });
+      }
+
+      async function load() {
+        if (!SHEET_CSV_URL) return render(SAMPLE);
+        try {
+          const res = await fetch(SHEET_CSV_URL);
+          const rows = parseCSV(await res.text()).slice(1); // skip the header row
+          const items = rows
+            .map((r) => [
+              (r[MESSAGE_COL] || "").trim(),
+              NAME_COL >= 0 ? (r[NAME_COL] || "").trim() : "",
+            ])
+            .filter((item) => item[0]); // ignore empty messages
+          render(items.length ? items : SAMPLE);
+        } catch (err) {
+          render(SAMPLE);
+        }
+      }
+      load();
+    </script>
+  </body>
+</html>
